@@ -20,8 +20,8 @@ Implementation of time-to-first-spike spiking neural network conversion for MNIS
 
 - 'train_mnist.py' - Train ReLU MLP on MNIST
 - 'convert_mnist_snn.py' - Convert to SNN and test on 10k samples
-- '2_layer_test.py` - Basic 2-layer conversion validation
-- 'stability_analysis.py` - Parameter sensitivity analysis
+- '2_layer_test.py' - Basic 2-layer conversion validation
+- 'stability_analysis.py' - Parameter sensitivity analysis
 
 ## Usage
 
