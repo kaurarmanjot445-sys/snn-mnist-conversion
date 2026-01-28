@@ -1,3 +1,7 @@
+
+"Implementation based on the exact gradient equivalence framework (Bellec et al.)."
+**Note: MNIST accuracy limited by training duration (3 epochs).**
+
 # snn-mnist-conversion
 Time-to-first-spike SNN conversion for MNIST - exact gradient equivalence implementation
 
