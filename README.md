@@ -65,7 +65,7 @@ This section extends the original single-layer and shallow-network validation to
 
      8      784 → 400^7 → 10      95.80%       83.50%      12.30%
 
-
+referenced as :depth_comparison.png
 
 # Training performance: All ReLU networks reached ~98% training accuracy using Adam (15 epochs).
 
