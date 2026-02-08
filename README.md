@@ -141,6 +141,9 @@ python time_axis_schematic.py # Temporal diagram
 4. Verify Numerical Exactness  
 python numerical_exactness_test.py  
 Tests conversion precision on 2-layer network.
+5.Additional Files (Optional)
+python convert_mnist_snn.py # Single 2-layer conversion demo
+python stability_analysis.py # Parameter sensitivity tests
 
 # Requirements  
 pip install numpy torch torchvision matplotlib  
