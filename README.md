@@ -1,112 +1,171 @@
 
-"Implementation based on the exact gradient equivalence framework (Bellec et al.)."
-**Note: MNIST accuracy limited by training duration (3 epochs).**
+*SNN-MNIST Conversion*
+Time-to-first-spike spiking neural network conversion for MNIST digit classification, based on High-performance deep spiking neural networks with 0.3 spikes per neuron, published on August 9, 2024,in nature Communications, by Ana Stanojevic. 
 
-# snn-mnist-conversion
-Time-to-first-spike SNN conversion for MNIST - exact gradient equivalence implementation
+# Overview
+This project demonstrates conversion of trained ReLU networks to spike-time coded SNNs without retraining. We investigate how network depth affects conversion quality and identify the numerical limits of time-based encoding.
 
-# SNN-MNIST Conversion
+# Key Results
+Training Performance
+All networks achieved approximately 98% test accuracy:
+Architecture Test Accuracy
 
-Implementation of time-to-first-spike spiking neural network conversion for MNIST digit classification, based on exact gradient equivalence.
-
-# Results
-
-**MNIST Conversion (Full Test Set):**
-- ReLU Network: 85.62% accuracy
-- SNN Conversion: 85.67% accuracy  
-- Accuracy drop: -0.05% (effectively identical)
-
-**Parameter Sensitivity:**
-- Correct threshold scaling: maintains machine precision up to 100 layers
-- 5% threshold error: breaks at ~20-30 layers
-
-# Files
-
-- 'train_mnist.py' - Train ReLU MLP on MNIST
-- 'convert_mnist_snn.py' - Convert to SNN and test on 10k samples
-- '2_layer_test.py' - Basic 2-layer conversion validation
-- 'stability_analysis.py' - Parameter sensitivity analysis
-
-## Usage
-
-### Train model
-''bash
-python train_mnist_simple.py
-
-*Test SNN conversion
-python convert_snn_simple.py
-
-#Requirements
-pip install numpy tensorflow
-
-#Method
-Uses parameter mapping from exact gradient equivalence:
-V = t_max - b - J.sum(0)
-α = 1 - J.sum(0)
-Activities encoded as spike times: high activity → early spike, low activity → late spike.
-
-#Architecture
-3-layer MLP: 784 → 400 → 400 → 10
-Training: 3 epochs, batch size 64
+2-layer (784 to 400  to 10) 98.04%
+4-layer (784 to 400^3 to 10) 98.37%
+6-layer (784 to 400^5 to 10) 98.06%
+8-layer (784 to 400^7 to 10) 98.01%
 
 
+# Conversion Results
+Layers ReLU Acc SNN Acc Drop
 
-**Extended Multi-Layer MNIST Analysis**
-This section extends the original single-layer and shallow-network validation to variable-depth ReLU MLPs, following Prof. Bellec’ suggestion to study depth-dependent behavior of the conversion.
+2 96.80% 96.50% 0.30%
+4 96.80% 96.30% 0.50%
+6 96.80% 94.00% 2.80%
+8 96.80% 92.00% 4.80%
 
-# Multi-Layer Results (MNIST)
+# Key Finding: Conversion maintains high fidelity for shallow networks (2-4 layers) but shows progressive degradation with depth, exposing numerical precision challenges in multi-layer spike-time propagation.
 
-    Layers	 Architecture	        ReLU Acc	   SNN Acc	   Drop
-		 2	     784 → 400 → 10       96.90%       96.80%      0.10%
-				
-		 4	    784 → 400^3 → 10      96.80%       95.10%      1.70%
-				
-     6      784 → 400^5 → 10      96.60%       92.80%      3.80%
+**Numerical Exactness Verification*
+Single-layer test demonstrates machine-precision equivalence:
+1.Maximum output difference: 0.0000000247
+2.Relative error: 2.47 × 10⁻⁹
+# This confirms the mathematical correctness of the conversion formula for shallow architectures.
 
-     8      784 → 400^7 → 10      95.80%       83.50%      12.30%
+# Spike-Time Analysis
+Spike-time distributions reveal the core challenge:
 
-referenced as :depth_comparison.png
+1. 2-layer: Well-distributed spike times across the temporal window
+2. 4-layer: Beginning to cluster
+3. 6-layer: Moderate clustering near temporal boundaries
+4. 8-layer: Severe clustering near t_max
 
-# Training performance: All ReLU networks reached ~98% training accuracy using Adam (15 epochs).
 
-**Interpretation**
-1. **Shallow networks* (2–4 layers)*:Conversion preserves classification performance with minimal degradation (<2%).
-2. **Moderate depth* (6 layers)*:Accuracy drop becomes noticeable but remains within a reasonable range.
-3. **Deep networks* (8 layers)*:Significant degradation appears, indicating numerical instability in deep spike-time propagation.
-   
-**These results suggest that while exact gradient equivalence holds mathematically, numerical precision effects accumulate with depth in time-to-first-spike implementations.**
+**When spike times cluster tightly, small numerical errors cause large changes in output activities, leading to misclassification.*
 
-# Discussion
-**The observed degradation in deep networks is likely due to:*
-1.Accumulation of floating-point errors across layers
-2.Spike times clustering near t_max, amplifying small numerical differences
-3.Increased sensitivity to weight magnitude and normalization in deep SNNs
-**This behavior is consistent with known challenges in rate-to-spike and time-based conversion methods and highlights an important practical limitation worth further investigation.**
+# Method
+Conversion Framework
+The conversion uses exact gradient equivalence to map ReLU parameters to SNN parameters:
+**Time encoding:*
+1.High activity to Early spike time
 
-**Method Summary**
-# Encoding:
-High activation → early spike
-Low activation → late spike
+2.Low activity to Late spike time
 
-# Parameter mapping (Bellec et al.):
-V = t_max − b − ΣW
-α = 1 − ΣW
 
-# Architecture:
-Input: 784 (MNIST)
-Hidden layers: 400 units (variable depth)
-Output: 10 classes
+# Parameter mapping:
+V_threshold = t_max - bias - Σ(weights)
+α = 1 - Σ(weights)
+spike_time = (V_threshold - V_rest) / input_current
+Critical detail: The bias term must be included in the threshold calculation. Omitting it breaks the gradient equivalence.
 
-# Training:
-Optimizer: Adam (lr = 1e-3)
-Epochs: 15
-Batch size: 64
-Framework: PyTorch
+**Time Window Configuration*
+Current approach: Fixed t_max = 15.0
+Activities encoded in window [0, t_max]
 
-# Files (Extended)
-1.train_mnist_pytorch.py – Train variable-depth ReLU MLPs
-2.convert_all_models.py – Batch SNN conversion and evaluation
-3.create_plot.py – Generate depth vs accuracy plot
-4.depth_comparison.png – Visualization
- # Takeaway
-# This extension shows that ReLU-to-SNN conversion is robust for shallow and moderately deep networks, while deep architectures expose numerical limits of spike-time propagation, making depth a key factor in practical SNN conversion.
+Simpler implementation for validation
+Standard in time-to-first-spike literature
+
+
+# Alternative approach (future work):
+1. Fix t_min instead of t_max
+2. Derive t_max per layer: t_max(L) = t_min(L+1)
+3. Ensures temporal continuity across layers
+4.May improve stability for deep networks
+
+
+
+
+# Training Details
+1.Optimizer: Adam (learning rate: 0.001)
+2. Learning rate schedule: StepLR (decay every 10 epochs, gamma=0.5)
+3. Epochs: 30 maximum (early stopping at 98%)
+4. Batch size: 64
+5. Initialization: Xavier uniform for weights, zeros for biases
+6.Framework: PyTorch
+
+
+# Analysis
+*What Works*
+
+# Shallow networks (2-4 layers):
+1.Conversion maintains near-perfect accuracy (<1% drop)
+2.Numerical precision remains stable
+3.Theoretical equivalence holds in practice
+
+
+# Mathematical framework:
+Exact gradient equivalence verified numerically
+Single-layer conversion achieves machine precision
+
+
+# Known Limitations
+*Deep networks (6-8 layers):*
+1.Progressive accuracy degradation with depth
+2.Root cause:Spike-time clustering near temporal boundaries
+3.Small floating-point errors to large output changes
+
+
+# The fundamental challenge: While the conversion is mathematically exact, numerical precision limits emerge when spike times propagate through many layers.Activities near zero map to times near t_max,where the temporal resolution becomes insufficient to distinguish between different activation levels.
+
+# Research Context
+This depth-dependent degradation is a known challenge in rate-to-spike conversion methods and represents an active area of research in neuromorphic computing. Potential solutions include:
+1.Layer-wise normalization techniques
+2.Adaptive temporal windows per layer
+3.Hybrid approaches combining conversion with fine-tuning
+
+
+Repository Structure
+
+1. train_mnist_pytorch.py # Train variable-depth ReLU MLPs
+2.  convert_all_models.py # Batch SNN conversion & testing
+3. create_plot.py # Generate depth comparison plot
+4. numerical_exactness_test.py # Verify conversion precision
+5. spike_distribution_plot.py # Visualize spike-time clustering
+6. time_axis_schematic.py # Create temporal propagation diagram
+7. depth_comparison.png # Main results visualization
+8. spike_time_distributions.png # Clustering analysis
+9. time_axis_schematic.png # Layer timing diagram
+10.  README.md
+
+# Usage
+1. Train Models
+python train_mnist_pytorch.py  
+Trains 2, 4, 6, and 8-layer networks. Saves trained weights to mnist_*_layer.pkl.  
+2. Convert and Test  
+python convert_all_models.py  
+Converts all trained models to SNNs and tests on 1000 MNIST samples.  
+3. Generate Visualizations  
+python create_plot.py # Depth comparison  
+python spike_distribution_plot.py # Spike clustering  
+python time_axis_schematic.py # Temporal diagram  
+4. Verify Numerical Exactness  
+python numerical_exactness_test.py  
+Tests conversion precision on 2-layer network.
+
+# Requirements  
+pip install numpy torch torchvision matplotlib  
+Tested with:  
+Python 3.8+  
+PyTorch 1.9+  
+NumPy 1.21+  
+Matplotlib 3.4+  
+
+# Key Insight  
+**This work demonstrates that exact gradient equivalence does not guarantee numerical stability. While the conversion is mathematically exact, floating-point precision limitations emerge at depth, exposing a fundamental challenge in time-to-first-spike conversion methods.*  
+**The progressive degradation with depth is not a flaw in the implementation but reveals an inherent limitation of the approach when spike times cluster near temporal boundaries.*
+
+# Future Directions  
+1.Implement layer normalization for improved deep network conversion  
+2.Test adaptive t_max strategies that scale with network depth  
+3.Explore alternative spike encoding schemes (rate coding, temporal patterns)  
+4.Benchmark against direct SNN training methods  
+5.Investigate hybrid conversion + fine-tuning approaches  
+
+# References  
+Implementation based on:  
+High-performance deep spiking neural networks with 0.3 spikes per neuron, published on August 9, 2024,by Ana Stanojevic.   
+Exact gradient equivalence framework for rate-to-spike conversion  
+
+# Acknowledgments  
+This work was developed under the guidance of Prof. Guillaume Bellec. Special thanks for the insights on numerical stability and time-based encoding challenges.  
+This repository demonstrates both the strengths (shallow networks) and current limitations (deep networks) of time-to-first-spike conversion, providing an honest assessment for the neuromorphic computing research community.
