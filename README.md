@@ -152,7 +152,6 @@ Matplotlib 3.4+
 
 # Key Insight  
 **This work demonstrates that exact gradient equivalence does not guarantee numerical stability. While the conversion is mathematically exact, floating-point precision limitations emerge at depth, exposing a fundamental challenge in time-to-first-spike conversion methods.*  
-**The progressive degradation with depth is not a flaw in the implementation but reveals an inherent limitation of the approach when spike times cluster near temporal boundaries.*
 
 # Future Directions  
 1.Implement layer normalization for improved deep network conversion  
@@ -168,4 +167,4 @@ Exact gradient equivalence framework for rate-to-spike conversion
 
 # Acknowledgments  
 This work was developed under the guidance of Prof. Guillaume Bellec. Special thanks for the insights on numerical stability and time-based encoding challenges.  
-This repository demonstrates both the strengths (shallow networks) and current limitations (deep networks) of time-to-first-spike conversion, providing an honest assessment for the neuromorphic computing research community.
+
