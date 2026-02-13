@@ -2,6 +2,11 @@ ReLU-to-SNN Conversion: Depth Analysis
 
 This repository studies how converting deep ReLU networks to spiking neural networks affects accuracy and temporal spike dynamics on MNIST
 
+**Results**
+
+Depth Comparison
+![Depth Comparison] ([depth_comparison.png](https://1drv.ms/i/c/5ad32c5f1e1dc822/IQD7CMmkCI9aTLsh3UTJ16sDAZ11Dk1pKGtSzOB1NA2dln8?e=CfQy4P))
+
 ## Depth Comparison
 
 | Layers | ReLU Acc | SNN Acc | Drop |
@@ -13,17 +18,12 @@ This repository studies how converting deep ReLU networks to spiking neural netw
 
 Conversion maintains accuracy for shallow networks but degrades with depth due to spike-time clustering near temporal boundaries.
 
-**Results**
-
-Depth Comparison
-![Depth Comparison] ([depth_comparison.png](https://1drv.ms/i/c/5ad32c5f1e1dc822/IQD7CMmkCI9aTLsh3UTJ16sDAZ11Dk1pKGtSzOB1NA2dln8?e=CfQy4P))
-
-
 **Numerical Verification:**
 
 2-layer precision: 2.47 × 10⁻⁹ error (machine precision confirmed)
 
  **Method:**
+ 
 **Architecture:** 784 → [400 × N] → 10 (N = 1, 3, 5, 7 hidden layers)
 
 **Training:** Adam (lr=0.001), batch size 64, Xavier init, 30 epochs max
