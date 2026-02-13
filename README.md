@@ -24,12 +24,11 @@ Architecture: 784 → [400 × N] → 10 (N = 1, 3, 5, 7 hidden layers)
 
 Training: Adam (lr=0.001), batch size 64, Xavier init, 30 epochs max
 
-t_max = 15.0
-V_threshold = t_max - bias - Σ(weights)
-spike_time = V_threshold / input_current
-output = t_max - spike_time
-
-
+Conversion:
+- t_max = 15.0
+- V_threshold = t_max - bias - Σ(weights)
+- spike_time = V_threshold / input_current
+- output = t_max - spike_time
 
 **Files:**
 
