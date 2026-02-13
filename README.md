@@ -19,12 +19,11 @@ Depth Comparison
 ![Depth Comparison] ([depth_comparison.png](https://1drv.ms/i/c/5ad32c5f1e1dc822/IQD7CMmkCI9aTLsh3UTJ16sDAZ11Dk1pKGtSzOB1NA2dln8?e=CfQy4P))
 
 
-**Numerical Verification:*
+**Numerical Verification:**
 
 2-layer precision: 2.47 × 10⁻⁹ error (machine precision confirmed)
 
- **Method:*
- 
+ **Method:**
 **Architecture:** 784 → [400 × N] → 10 (N = 1, 3, 5, 7 hidden layers)
 
 **Training:** Adam (lr=0.001), batch size 64, Xavier init, 30 epochs max
