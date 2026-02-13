@@ -2,9 +2,9 @@ ReLU-to-SNN Conversion: Depth Analysis
 
 This repository studies how converting deep ReLU networks to spiking neural networks affects accuracy and temporal spike dynamics on MNIST
 
-```**Results**
+**Results**
 Depth Comparison
-![Depth Comparison] ([depth_comparison.png](https://1drv.ms/i/c/5ad32c5f1e1dc822/IQD7CMmkCI9aTLsh3UTJ16sDAZ11Dk1pKGtSzOB1NA2dln8?e=CfQy4P))```
+![Depth Comparison] ([depth_comparison.png](https://1drv.ms/i/c/5ad32c5f1e1dc822/IQD7CMmkCI9aTLsh3UTJ16sDAZ11Dk1pKGtSzOB1NA2dln8?e=CfQy4P))
 
 ## Depth Comparison
 
