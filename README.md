@@ -1,5 +1,6 @@
 ReLU-to-SNN Conversion: Depth Analysis
-Systematic study of how network depth affects time-to-first-spike conversion quality on MNIST.
+This repository studies how converting deep ReLU networks to spiking neural networks affects accuracy and temporal spike dynamics on MNIST
+
 
 Results
 Depth Comparison
@@ -33,12 +34,15 @@ spike_time = V_threshold / input_current
 output = t_max - spike_time
 ```
 
-**Files:**
-
-1. train_mnist_pytorch.py - Train 2, 4, 6, 8-layer ReLU networks on MNIST
-2. convert_all_models.py - Convert trained models to SNNs and evaluate
-3. create_plot.py - Generate depth vs accuracy comparison plot
-4. numerical_exactness_test.py - Verify conversion precision on 2-layer network
+**Files Usage:**
+Step 1: Train networks
+train_mnist_pytorch.py - Train 2, 4, 6, 8-layer ReLU networks on MNIST
+Step 2: Convert trained models to SNN
+convert_all_models.py - Convert trained models to SNNs and evaluate
+Step 3: Generate plots
+create_plot.py - Generate depth vs accuracy comparison plot
+Step 4: Verify numerical exactness
+numerical_exactness_test.py - Verify conversion precision on 2-layer network
 
 **Figures:**
 1. depth_comparison.png - Main result showing accuracy degradation with depth
