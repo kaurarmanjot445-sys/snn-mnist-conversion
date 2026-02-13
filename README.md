@@ -5,11 +5,15 @@ Results
 Depth Comparison
 ![Depth Comparison] ([depth_comparison.png](https://1drv.ms/i/c/5ad32c5f1e1dc822/IQD7CMmkCI9aTLsh3UTJ16sDAZ11Dk1pKGtSzOB1NA2dln8?e=CfQy4P))
 
-Layers	ReLU Acc	SNN Acc	Drop
-2	96.70%	96.50%	0.20%
-4	96.30%	95.60%	0.70%
-6	96.50%	93.10%	3.40%
-8	96.40%	91.20%	5.20%
+## Depth Comparison
+
+| Layers | ReLU Acc | SNN Acc | Drop |
+|--------|----------|---------|------|
+| 2      | 96.70%   | 96.50%  | 0.20% |
+| 4      | 96.30%   | 95.60%  | 0.70% |
+| 6      | 96.50%   | 93.10%  | 3.40% |
+| 8      | 96.40%   | 91.20%  | 5.20% |
+
 Conversion maintains accuracy for shallow networks but degrades with depth due to spike-time clustering near temporal boundaries.
 
 Numerical Verification
