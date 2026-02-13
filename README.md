@@ -2,11 +2,6 @@ ReLU-to-SNN Conversion: Depth Analysis
 
 This repository studies how converting deep ReLU networks to spiking neural networks affects accuracy and temporal spike dynamics on MNIST
 
-
-Results
-Depth Comparison
-![Depth Comparison] ([depth_comparison.png](https://1drv.ms/i/c/5ad32c5f1e1dc822/IQD7CMmkCI9aTLsh3UTJ16sDAZ11Dk1pKGtSzOB1NA2dln8?e=CfQy4P))
-
 ## Depth Comparison
 
 | Layers | ReLU Acc | SNN Acc | Drop |
@@ -18,6 +13,9 @@ Depth Comparison
 
 Conversion maintains accuracy for shallow networks but degrades with depth due to spike-time clustering near temporal boundaries.
 
+**Results**
+Depth Comparison
+![Depth Comparison] ([depth_comparison.png](https://1drv.ms/i/c/5ad32c5f1e1dc822/IQD7CMmkCI9aTLsh3UTJ16sDAZ11Dk1pKGtSzOB1NA2dln8?e=CfQy4P))
 **Numerical Verification:*
 
 2-layer precision: 2.47 × 10⁻⁹ error (machine precision confirmed)
@@ -58,15 +56,13 @@ output = t_max - spike_time
 2. spike_time_distributions.png - Histogram showing spike clustering in deep networks
 3. time_axis_schematic.png - Temporal propagation diagram across layers 
 
-**Requirements**
-
+**Requirements:**
 pip install numpy torch torchvision matplotlib  
 
 **Key Insight**  
 Exact gradient equivalence does not guarantee numerical stability. Precision limits emerge at depth when spike times cluster.  
 
-**Acknowledgments** 
-
+**Acknowledgments:** 
 Developed under the guidance of Prof. Guillaume Bellec.
 
 
