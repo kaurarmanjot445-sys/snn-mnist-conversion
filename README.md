@@ -14,8 +14,11 @@ This repository studies how converting deep ReLU networks to spiking neural netw
 Conversion maintains accuracy for shallow networks but degrades with depth due to spike-time clustering near temporal boundaries.
 
 **Results**
+
 Depth Comparison
 ![Depth Comparison] ([depth_comparison.png](https://1drv.ms/i/c/5ad32c5f1e1dc822/IQD7CMmkCI9aTLsh3UTJ16sDAZ11Dk1pKGtSzOB1NA2dln8?e=CfQy4P))
+
+
 **Numerical Verification:*
 
 2-layer precision: 2.47 × 10⁻⁹ error (machine precision confirmed)
