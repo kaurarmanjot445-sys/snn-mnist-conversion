@@ -18,10 +18,10 @@ Depth Comparison
 
 Conversion maintains accuracy for shallow networks but degrades with depth due to spike-time clustering near temporal boundaries.
 
-# #Numerical Verification:
+**Numerical Verification:*
 2-layer precision: 2.47 × 10⁻⁹ error (machine precision confirmed)
 
- # #Method:
+ **Method:*
 **Architecture:** 784 → [400 × N] → 10 (N = 1, 3, 5, 7 hidden layers)
 
 **Training:** Adam (lr=0.001), batch size 64, Xavier init, 30 epochs max
