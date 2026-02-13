@@ -31,8 +31,7 @@ spike_time = V_threshold / input_current
 output = t_max - spike_time
 
 
-## Files
-
+**Files:**
 1.train_mnist_pytorch.py - Train 2, 4, 6, 8-layer ReLU networks on MNIST
 2.convert_all_models.py - Convert trained models to SNNs and evaluate
 3.create_plot.py - Generate depth vs accuracy comparison plot
