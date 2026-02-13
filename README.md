@@ -59,12 +59,14 @@ output = t_max - spike_time
 3. time_axis_schematic.png - Temporal propagation diagram across layers 
 
 **Requirements**
+
 pip install numpy torch torchvision matplotlib  
 
 **Key Insight**  
 Exact gradient equivalence does not guarantee numerical stability. Precision limits emerge at depth when spike times cluster.  
 
 **Acknowledgments** 
+
 Developed under the guidance of Prof. Guillaume Bellec.
 
 
