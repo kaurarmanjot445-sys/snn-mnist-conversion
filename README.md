@@ -33,15 +33,15 @@ output = t_max - spike_time
 
 ## Files
 
--train_mnist_pytorch.py - Train 2, 4, 6, 8-layer ReLU networks on MNIST
--convert_all_models.py - Convert trained models to SNNs and evaluate
--create_plot.py - Generate depth vs accuracy comparison plot
--numerical_exactness_test.py - Verify conversion precision on 2-layer network
+1.train_mnist_pytorch.py - Train 2, 4, 6, 8-layer ReLU networks on MNIST
+2.convert_all_models.py - Convert trained models to SNNs and evaluate
+3.create_plot.py - Generate depth vs accuracy comparison plot
+4.numerical_exactness_test.py - Verify conversion precision on 2-layer network
 
 **Figures:**
-- depth_comparison.png - Main result showing accuracy degradation with depth
-- spike_time_distributions.png - Histogram showing spike clustering in deep networks
-- time_axis_schematic.png - Temporal propagation diagram across layers 
+1. depth_comparison.png - Main result showing accuracy degradation with depth
+2. spike_time_distributions.png - Histogram showing spike clustering in deep networks
+3. time_axis_schematic.png - Temporal propagation diagram across layers 
 
 Requirements  
 pip install numpy torch torchvision matplotlib  
