@@ -25,6 +25,7 @@ Conversion maintains accuracy for shallow networks but degrades with depth due t
  **Method:*
  
 **Architecture:** 784 → [400 × N] → 10 (N = 1, 3, 5, 7 hidden layers)
+
 **Training:** Adam (lr=0.001), batch size 64, Xavier init, 30 epochs max
 
 Conversion:
