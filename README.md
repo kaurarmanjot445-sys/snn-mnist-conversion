@@ -27,11 +27,17 @@ spike_time = V_threshold / input_current
 output = t_max - spike_time
 
 
-Usage
-python train_mnist_pytorch.py  
-python convert_all_models.py  
-python create_plot.py  
-python numerical_exactness_test.py  
+## Files
+
+-train_mnist_pytorch.py - Train 2, 4, 6, 8-layer ReLU networks on MNIST
+-convert_all_models.py - Convert trained models to SNNs and evaluate
+-create_plot.py - Generate depth vs accuracy comparison plot
+-numerical_exactness_test.py - Verify conversion precision on 2-layer network
+
+**Figures:**
+- depth_comparison.png - Main result showing accuracy degradation with depth
+- spike_time_distributions.png - Histogram showing spike clustering in deep networks
+- time_axis_schematic.png - Temporal propagation diagram across layers 
 
 Requirements  
 pip install numpy torch torchvision matplotlib  
