@@ -58,13 +58,13 @@ output = t_max - spike_time
 2. spike_time_distributions.png - Histogram showing spike clustering in deep networks
 3. time_axis_schematic.png - Temporal propagation diagram across layers 
 
-Requirements  
+**Requirements**
 pip install numpy torch torchvision matplotlib  
 
-Key Insight  
+**Key Insight**  
 Exact gradient equivalence does not guarantee numerical stability. Precision limits emerge at depth when spike times cluster.  
 
-Acknowledgments  
+**Acknowledgments** 
 Developed under the guidance of Prof. Guillaume Bellec.
 
 
