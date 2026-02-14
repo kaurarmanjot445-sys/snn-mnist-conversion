@@ -11,10 +11,10 @@ Depth Comparison
 
 | Layers | ReLU Acc | SNN Acc | Drop |
 |--------|----------|---------|------|
-| 2      | 96.70%   | 96.50%  | 0.20% |
-| 4      | 96.30%   | 95.60%  | 0.70% |
-| 6      | 96.50%   | 93.10%  | 3.40% |
-| 8      | 96.40%   | 91.20%  | 5.20% |
+| 2      | 96.10%   | 96.40%  | -0.30% |
+| 4      | 94.20%   | 95.60%  | 1.20% |
+| 6      | 96.10%   | 93.10%  | 1.60% |
+| 8      | 96.80%   | 91.20%  | 3.30% |
 
 Conversion maintains accuracy for shallow networks but degrades with depth due to spike-time clustering near temporal boundaries.
 
@@ -61,9 +61,7 @@ output = t_max - spike_time
 
 **Figures:**
 1. depth_comparison.png - Main result showing accuracy degradation with depth
-2. spike_time_distributions.png - Histogram showing spike clustering in deep networks
-3. time_axis_schematic.png - Temporal propagation diagram across layers 
-4. stability_analysis.png -
+2. stability_analysis.png -
 **Requirements:**
 pip install numpy torch torchvision matplotlib  
 
