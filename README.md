@@ -26,7 +26,7 @@ Tested conversion precision across network depths (2-100 layers):
 
 Demonstrates formula correctness and sensitivity to parameter precision.
 
-![Stability Analysis](stability_analysis.png)
+![Stability Analysis] https://1drv.ms/i/c/5ad32c5f1e1dc822/IQDo87ld9xrMToHpitweU6kJAbZylU8SIMjp8jH1ZpnhbFQ?e=WGDXj0
 
  **Method:**
  
