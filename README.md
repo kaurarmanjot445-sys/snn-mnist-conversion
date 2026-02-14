@@ -18,9 +18,15 @@ Depth Comparison
 
 Conversion maintains accuracy for shallow networks but degrades with depth due to spike-time clustering near temporal boundaries.
 
-**Numerical Verification:**
+## Numerical Verification
 
-2-layer precision: 2.47 × 10⁻⁹ error (machine precision confirmed)
+Tested conversion precision across network depths (2-100 layers):
+- **Correct parameters:** Error < 10⁻¹⁴ (machine precision) at all depths
+- **5% threshold error:** Breaks immediately (error ~1.0)
+
+Demonstrates formula correctness and sensitivity to parameter precision.
+
+![Stability Analysis](stability_analysis.png)
 
  **Method:**
  
@@ -49,7 +55,7 @@ output = t_max - spike_time
    `python create_plot.py`  
    Generate depth vs accuracy comparison plot.
 4. **Verify numerical exactness**  
-   `python numerical_exactness_test.py`  
+   `python stability_analysis.py`  
    Verify conversion precision on 2-layer network.
 
 
@@ -57,7 +63,7 @@ output = t_max - spike_time
 1. depth_comparison.png - Main result showing accuracy degradation with depth
 2. spike_time_distributions.png - Histogram showing spike clustering in deep networks
 3. time_axis_schematic.png - Temporal propagation diagram across layers 
-
+4. stability_analysis.png -
 **Requirements:**
 pip install numpy torch torchvision matplotlib  
 
