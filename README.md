@@ -62,6 +62,8 @@ output = t_max - spike_time
 **Figures:**
 1. depth_comparison.png - Main result showing accuracy degradation with depth
 2. stability_analysis.png -
+   
+
 **Requirements:**
 pip install numpy torch torchvision matplotlib  
 
