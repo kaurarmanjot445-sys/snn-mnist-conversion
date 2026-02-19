@@ -5,7 +5,7 @@ This repository studies how converting deep ReLU networks to spiking neural netw
 **Results**
 
 Depth Comparison
-https://github.com/kaurarmanjot445-sys/snn-mnist-conversion/blob/main/depth_comparison.png?raw=true
+[https://github.com/kaurarmanjot445-sys/snn-mnist-conversion/blob/main/depth_comparison.png?raw=true](https://github.com/kaurarmanjot445-sys/snn-mnist-conversion/blob/main/depth_comparisons.png?raw=true)
 
 
 
