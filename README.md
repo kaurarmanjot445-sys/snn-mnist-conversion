@@ -5,7 +5,7 @@ This repository studies how converting deep ReLU networks to spiking neural netw
 **Results**
 
 Depth Comparison
-![Depth Comparison] ([depth_comparison.png])
+![Depth Comparison] depth_comparison.png
 
 ## Depth Comparison
 
