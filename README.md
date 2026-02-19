@@ -26,7 +26,7 @@ Tested conversion precision across network depths (2-100 layers):
 
 Demonstrates formula correctness and sensitivity to parameter precision.
 
-![Stability Analysis] https://1drv.ms/i/c/5ad32c5f1e1dc822/IQDo87ld9xrMToHpitweU6kJAbZylU8SIMjp8jH1ZpnhbFQ?e=WGDXj0
+![Stability Analysis] (Stability_Analysis.png)
 
  **Method:**
  
@@ -61,7 +61,7 @@ output = t_max - spike_time
 
 **Figures:**
 1. depth_comparison.png - Main result showing accuracy degradation with depth
-2. stability_analysis.png -
+2. stability_analysis.png 
    
 
 **Requirements:**
