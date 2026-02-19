@@ -6,8 +6,7 @@ This repository studies how converting deep ReLU networks to spiking neural netw
 
 Depth Comparison
 ![Depth Comparison] depth_comparison.png
-
-## Depth Comparison![Uploading depth_comparison.png…]()
+ Depth Comparison![Uploading depth_comparison.png…]()
 
 
 | Layers | ReLU Acc | SNN Acc | Drop 
