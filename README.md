@@ -12,7 +12,7 @@ Trained networks at different depths (2, 4, 6, 8 layers) to ~98% training accura
 | 6      | 96.10%   | 93.10%  | 1.60% |
 | 8      | 96.80%   | 91.20%  | 3.30% |
 
-Depth Comparison
+**Depth Comparison**
 ![this is the image](https://github.com/kaurarmanjot445-sys/snn-mnist-conversion/blob/main/depth_comparison.png?raw=true)
 
 The conversion works well for shallow networks but accuracy drops increase with depth.
@@ -31,7 +31,7 @@ For each layer:
 - Decode back: output = t_max - t_out
 ```
 
-Numerical Stability
+**Numerical Stability**
 
 I tested the conversion formula on simple toy networks (2-100 layers) to verify it works correctly in principle:
 ![this is the image](https://github.com/kaurarmanjot445-sys/snn-mnist-conversion/blob/main/stability_analysis.png?raw=true)
