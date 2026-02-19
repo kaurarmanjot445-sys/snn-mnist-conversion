@@ -31,11 +31,13 @@ For each layer:
 - Decode back: output = t_max - t_out
 ```
 
-## Spike time behavior
+Numerical Stability
 
-Looking at how spike times are distributed across layers shows why deeper networks lose accuracy:
-
+I tested the conversion formula on simple toy networks (2-100 layers) to verify it works correctly in principle:
 ![this is the image](https://github.com/kaurarmanjot445-sys/snn-mnist-conversion/blob/main/stability_analysis.png?raw=true)
+
+With correct parameters, the formula maintains machine precision (error < 10⁻¹⁴) even at 100 layers. With intentionally broken parameters (5% error in threshold), it fails immediately. This confirms the formula itself is mathematically sound - the accuracy drops I'm seeing on MNIST are coming from something else (probably the normalization strategy between layers).
+
 
 ## Files Usage
 
