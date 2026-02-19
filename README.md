@@ -26,7 +26,7 @@ Tested conversion precision across network depths (2-100 layers):
 
 Demonstrates formula correctness and sensitivity to parameter precision.
 
-https://github.com/kaurarmanjot445-sys/snn-mnist-conversion/blob/main/stability_analysis.png?raw=true
+![this is the image](https://github.com/kaurarmanjot445-sys/snn-mnist-conversion/blob/main/stability_analysis.png?raw=true)
 
  **Method:**
  
