@@ -1,13 +1,9 @@
-ReLU-to-SNN Conversion: Depth Analysis
+ReLU to SNN Conversion on MNIST
 
-This repository studies how converting deep ReLU networks to spiking neural networks affects accuracy and temporal spike dynamics on MNIST
+Converting trained ReLU networks to spiking neural networks using time-to-first-spike encoding.
 
 **Results**
-
-Depth Comparison
-![this is the image](https://github.com/kaurarmanjot445-sys/snn-mnist-conversion/blob/main/depth_comparison.png?raw=true)
-
-
+Trained networks at different depths (2, 4, 6, 8 layers) to ~98% training accuracy, then converted to SNNs and tested on 1000 MNIST samples:
 
 | Layers | ReLU Acc | SNN Acc | Drop 
 |--------|----------|---------|------|
@@ -16,32 +12,30 @@ Depth Comparison
 | 6      | 96.10%   | 93.10%  | 1.60% |
 | 8      | 96.80%   | 91.20%  | 3.30% |
 
-Conversion maintains accuracy for shallow networks but degrades with depth due to spike-time clustering near temporal boundaries.
+Depth Comparison
+![this is the image](https://github.com/kaurarmanjot445-sys/snn-mnist-conversion/blob/main/depth_comparison.png?raw=true)
 
-## Numerical Verification
+The conversion works well for shallow networks but accuracy drops increase with depth.
 
-Tested conversion precision across network depths (2-100 layers):
-- **Correct parameters:** Error < 10⁻¹⁴ (machine precision) at all depths
-- **5% threshold error:** Breaks immediately (error ~1.0)
+## How the conversion works
 
-Demonstrates formula correctness and sensitivity to parameter precision.
+The basic idea is to convert ReLU activations into spike times - higher activation means earlier spike time.
+
+![Time Axis Schematic](time_axis_schematic.png)
+
+```
+For each layer:
+- Input activities get mapped to spike times: t = 1 - x (normalized to [0,1])
+- Threshold: V = t_max - bias - sum(weights)  
+- Output spike time: t_out = V / current
+- Decode back: output = t_max - t_out
+```
+
+## Spike time behavior
+
+Looking at how spike times are distributed across layers shows why deeper networks lose accuracy:
 
 ![this is the image](https://github.com/kaurarmanjot445-sys/snn-mnist-conversion/blob/main/stability_analysis.png?raw=true)
-
- **Method:**
- 
-**Architecture:** 784 → [400 × N] → 10 (N = 1, 3, 5, 7 hidden layers)
-
-**Training:** Adam (lr=0.001), batch size 64, Xavier init, 30 epochs max
-
-Conversion:
-
-```
-t_max = 15.0
-V_threshold = t_max - bias - Σ(weights)
-spike_time = V_threshold / input_current
-output = t_max - spike_time
-```
 
 ## Files Usage
 
@@ -59,16 +53,11 @@ output = t_max - spike_time
    Verify conversion precision on 2-layer network.
 
 
-**Figures:**
-1. depth_comparison.png - Main result showing accuracy degradation with depth
-2. stability_analysis.png 
-   
-
 **Requirements:**
 pip install numpy torch torchvision matplotlib  
 
-**Key Insight**  
-Exact gradient equivalence does not guarantee numerical stability. Precision limits emerge at depth when spike times cluster.  
+**What I learned**  
+The conversion maintains pretty good accuracy for 2-4 layer networks (drops under 1.5%), but deeper networks show larger drops (3%+ for 8 layers). This seems to be related to how spike times behave across multiple layers - they tend to cluster which reduces numerical precision.
 
 **Acknowledgments:** 
 Developed under the guidance of Prof. Guillaume Bellec.
