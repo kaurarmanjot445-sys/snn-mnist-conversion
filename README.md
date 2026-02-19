@@ -9,7 +9,7 @@ Depth Comparison
 
 ## Depth Comparison
 
-| Layers | ReLU Acc | SNN Acc | Drop |
+| Layers | ReLU Acc | SNN Acc | Drop 
 |--------|----------|---------|------|
 | 2      | 96.10%   | 96.40%  | -0.30% |
 | 4      | 94.20%   | 95.60%  | 1.20% |
