@@ -24,7 +24,7 @@ we are converting trained ReLU networks into Spiking Neural Networks — no retr
 ## Figures
 
 ### Accuracy and Sparsity vs Depth
-![this is a image] ([https://github.com/kaurarmanjot445-sys/snn-mnist-conversion/blob/main/depth_comparison.png?raw=true)](https://github.com/kaurarmanjot445-sys/snn-mnist-conversion/blob/af78c53f95a53014bd1ec49abe9bac180545c1a3/depth_comparison.png))
+![this is a image](https://github.com/kaurarmanjot445-sys/snn-mnist-conversion/blob/af78c53f95a53014bd1ec49abe9bac180545c1a3/depth_comparison.png))
 
 ### Numerical Stability: Correct vs Wrong t_max
 ![Stability Analysis]
