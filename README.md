@@ -43,7 +43,7 @@ Timing chains across layers: `t_min` of layer n = `t_max` of layer n-1.
 
 | File | What it does |
 |------|-------------|
-| `single_layer_demo.py` | Verify math on toy networks first |
+| `single_layer.py` | Verify math on toy networks first |
 | `train_mnist_pytorch.py` | Train and save ReLU models |
 | `convert_all_models.py` | Convert to SNN, check accuracy |
 | `create_plot.py` | Generate figures |
