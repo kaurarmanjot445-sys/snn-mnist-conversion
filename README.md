@@ -11,8 +11,8 @@ This project converts trained ReLU networks into Time-to-First-Spike (TTFS) Spik
 ---
 ## Results
 
-| Hidden Layers | ReLU Acc | SNN Acc | Sparsity |
-|--------------:|:--------:|:-------:|:--------:|
+|Hidden Layers| ReLU Acc | SNN Acc | Sparsity |
+|------------:|:--------:|:-------:|:--------:|
 |2 | 98.20% | 98.20% | 0.44 |
 |4 | 98.32% | 98.32% | 0.26 |
 |6 | 98.23% | 98.23% | 0.25 |
