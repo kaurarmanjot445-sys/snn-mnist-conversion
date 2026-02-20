@@ -1,69 +1,70 @@
-ReLU to SNN Conversion on MNIST
-
-Converting trained ReLU networks to spiking neural networks using time-to-first-spike encoding.
-
-**Results**
-Trained networks at different depths (2, 4, 6, 8 layers) to ~98% training accuracy, then converted to SNNs and tested on 1000 MNIST samples:
-
-| Layers | ReLU Acc | SNN Acc | Drop 
-|--------|----------|---------|------|
-| 2      | 96.10%   | 96.40%  | -0.30% |
-| 4      | 94.20%   | 95.60%  | 1.20% |
-| 6      | 96.10%   | 93.10%  | 1.60% |
-| 8      | 96.80%   | 91.20%  | 3.30% |
-
 **Depth Comparison**
 ![this is the image](https://github.com/kaurarmanjot445-sys/snn-mnist-conversion/blob/main/depth_comparison.png?raw=true)
 
-The conversion works well for shallow networks but accuracy drops increase with depth.
 
-## How the conversion works
 
-The basic idea is to convert ReLU activations into spike times - higher activation means earlier spike time.
+# ReLU to SNN Conversion on MNIST
+we are converting trained ReLU networks into Spiking Neural Networks — no retraining needed, just math. Based on Stanojevic et al., *Nature Communications* 2024, with guidance from Dr. Guillaume Bellec (TU Graz, Austria).
 
-![Time Axis Schematic](time_axis_schematic.png)
+---
+## What I did
 
+- Trained ReLU networks (2, 4, 6, 8 hidden layers) on MNIST
+- Converted each to a TTFS SNN using the B1 identity mapping (Eq. 9)
+- Verified numerically that SNN == ReLU at every layer
+
+---
+## Results
+
+| Hidden Layers | ReLU Acc | SNN Acc | Sparsity |
+|--------------:|:--------:|:-------:|:--------:|
+| 2 | 98.20% | 98.20% | 0.44 |
+| 4 | 98.32% | 98.32% | 0.26 |
+| 6 | 98.23% | 98.23% | 0.25 |
+| 8 | 98.26% | 98.26% | 0.20 |
+
+0% accuracy drop —correct,not a bug.The conversion is mathematically exact.
+
+---
+## Figures
+
+### Accuracy and Sparsity vs Depth
+<!-- depth_comparison.png goes here — add it to your repo folder and it shows automatically on GitHub -->
+![Depth Comparison](depth_comparison.png)
+
+### Numerical Stability: Correct vs Wrong t_max
+<!-- stability_analysis.png goes here — same thing, just place it in the same folder -->
+![Stability Analysis](stability_analysis.png)
+
+---
+
+## How it works
+Each neuron fires one spike at time `t`. Activation is recovered as `x = t_max - t`.
+B1 mapping sets:
+- `W_snn = W_relu` (weights unchanged)
+- `V = (t_max - t_min) - b` (threshold from bias)
+Timing chains across layers: `t_min` of layer n = `t_max` of layer n-1.
+
+## Files
+
+| File | What it does |
+|------|-------------|
+| `single_layer_demo.py` | Verify math on toy networks first |
+| `train_mnist_pytorch.py` | Train and save ReLU models |
+| `convert_all_models.py` | Convert to SNN, check accuracy |
+| `create_plot.py` | Generate figures |
+| `stability_analysis.py` | Show why correct t_max matters |
+
+## Run
+
+```python single_layer_demo.py
+python train_mnist_pytorch.py
+python convert_all_models.py
+python create_plot.py
 ```
-For each layer:
-- Input activities get mapped to spike times: t = 1 - x (normalized to [0,1])
-- Threshold: V = t_max - bias - sum(weights)  
-- Output spike time: t_out = V / current
-- Decode back: output = t_max - t_out
-```
+## Acknowledgements
 
-**Numerical Stability**
-
-I tested the conversion formula on simple toy networks (2-100 layers) to verify it works correctly in principle:
-![this is the image](https://github.com/kaurarmanjot445-sys/snn-mnist-conversion/blob/main/stability_analysis.png?raw=true)
-
-With correct parameters, the formula maintains machine precision (error < 10⁻¹⁴) even at 100 layers. With intentionally broken parameters (5% error in threshold), it fails immediately. This confirms the formula itself is mathematically sound - the accuracy drops I'm seeing on MNIST are coming from something else (probably the normalization strategy between layers).
-
-
-## Files Usage
-
-1. **Train networks**  
-   `python train_mnist_pytorch.py`  
-   Train 2, 4, 6, 8-layer ReLU networks on MNIST.
-2. **Convert trained models to SNN**  
-   `python convert_all_models.py`  
-   Convert trained models to SNNs and evaluate.
-3. **Generate plots**  
-   `python create_plot.py`  
-   Generate depth vs accuracy comparison plot.
-4. **Verify numerical exactness**  
-   `python stability_analysis.py`  
-   Verify conversion precision on 2-layer network.
-
-
-**Requirements:**
-pip install numpy torch torchvision matplotlib  
-
-**What I learned**  
-The conversion maintains pretty good accuracy for 2-4 layer networks (drops under 1.5%), but deeper networks show larger drops (3%+ for 8 layers). This seems to be related to how spike times behave across multiple layers - they tend to cluster which reduces numerical precision.
-
-**Acknowledgments:** 
-Developed under the guidance of Prof. Guillaume Bellec.
-
-
+- Dr. Guillaume Bellec (TU Graz) for email guidance
+- Stanojevic et al. — paper + code: https://github.com/IBM/equivalent-training-ReLUnetwork-SNN
 
 
