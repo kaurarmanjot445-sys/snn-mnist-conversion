@@ -64,7 +64,5 @@ python create_plot.py
 ```
 ## Acknowledgements
 
-- Dr. Guillaume Bellec (TU Graz) for email guidance
-- Stanojevic et al. — paper + code: https://github.com/IBM/equivalent-training-ReLUnetwork-SNN
-
+- Dr. Guillaume Bellec guidance
 
