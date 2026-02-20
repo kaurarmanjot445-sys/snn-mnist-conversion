@@ -59,7 +59,8 @@ python stability_analysiss.py
 ```torch>=1.12
 torchvision>=0.13
 numpy>=1.21
-matplotlib>=3.5```
+matplotlib>=3.5
+```
 ## Acknowledgements
 - Guided by Dr. Guillaume Bellec 
 
