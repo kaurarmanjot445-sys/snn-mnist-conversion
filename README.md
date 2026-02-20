@@ -30,7 +30,7 @@ we are converting trained ReLU networks into Spiking Neural Networks — no retr
 
 ### Accuracy and Sparsity vs Depth
 <!-- depth_comparison.png goes here — add it to your repo folder and it shows automatically on GitHub -->
-![Depth Comparison](depth_comparison.png)
+![Depth Comparison]([depth_comparison.png](https://github.com/kaurarmanjot445-sys/snn-mnist-conversion/blob/main/stability_analysis.png?raw=true))
 
 ### Numerical Stability: Correct vs Wrong t_max
 <!-- stability_analysis.png goes here — same thing, just place it in the same folder -->
