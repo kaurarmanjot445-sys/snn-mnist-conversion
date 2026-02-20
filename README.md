@@ -1,5 +1,5 @@
 # ReLU to SNN Conversion on MNIST
-We are converting trained ReLU networks into Spiking Neural Networks — no retraining needed, just math. Based on Stanojevic et al., *Nature Communications* 2024, with guidance from Dr. Guillaume Bellec (TU Graz, Austria).
+We are converting trained ReLU networks into Spiking Neural Networks — no retraining needed, just math. Based on Stanojevic et al., *Nature Communications* 2024, with guidance from Dr. Guillaume Bellec.
 
 ---
 ## What I did
@@ -55,6 +55,11 @@ python convert_all_models.py
 python create_plot.py
 python stability_analysiss.py
 ```
+## Requirements
+```torch>=1.12
+torchvision>=0.13
+numpy>=1.21
+matplotlib>=3.5```
 ## Acknowledgements
-- Dr. Guillaume Bellec guidance
+- Guided by Dr. Guillaume Bellec 
 
