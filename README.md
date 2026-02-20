@@ -1,5 +1,5 @@
 # ReLU to SNN Conversion on MNIST
-We are converting trained ReLU networks into Spiking Neural Networks — no retraining needed, just math. Based on Stanojevic et al., *Nature Communications* 2024, with guidance from Dr. Guillaume Bellec.
+This project converts trained ReLU networks into Time-to-First-Spike (TTFS) Spiking Neural Networks using the B1 identity mapping from Stanojevic et al., Nature Communications 2024.
 
 ---
 ## What I did
@@ -18,7 +18,7 @@ We are converting trained ReLU networks into Spiking Neural Networks — no retr
 | 6 | 98.23% | 98.23% | 0.25 |
 | 8 | 98.26% | 98.26% | 0.20 |
 
-0% accuracy drop —correct,not a bug.The conversion is mathematically exact.
+The conversion preserves accuracy, consistent with the exact theoretical mapping described in Eq. 9 of the paper.
 
 ---
 ## Figures
@@ -32,6 +32,7 @@ We are converting trained ReLU networks into Spiking Neural Networks — no retr
 ---
 
 ## How it works
+The conversion was verified by comparing layer-wise activations and final classification accuracy between the original ReLU network and the converted SNN.
 Each neuron fires one spike at time `t`. Activation is recovered as `x = t_max - t`.
 B1 mapping sets:
 - `W_snn = W_relu` (weights unchanged)
@@ -53,7 +54,7 @@ Timing chains across layers: `t_min` of layer n = `t_max` of layer n-1.
 python train_mnist_pytorch.py
 python convert_all_models.py
 python create_plot.py
-python stability_analysiss.py
+python stability_analysis.py
 ```
 ## Requirements
 ```torch>=1.12
@@ -62,5 +63,5 @@ numpy>=1.21
 matplotlib>=3.5
 ```
 ## Acknowledgements
-- Guided by Dr. Guillaume Bellec 
+- Guidance provided by Dr.Guillaume Bellec
 
