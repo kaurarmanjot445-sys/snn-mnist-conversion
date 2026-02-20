@@ -1,8 +1,3 @@
-**Depth Comparison**
-![this is the image](https://github.com/kaurarmanjot445-sys/snn-mnist-conversion/blob/main/depth_comparison.png?raw=true)
-
-
-
 # ReLU to SNN Conversion on MNIST
 we are converting trained ReLU networks into Spiking Neural Networks — no retraining needed, just math. Based on Stanojevic et al., *Nature Communications* 2024, with guidance from Dr. Guillaume Bellec (TU Graz, Austria).
 
@@ -29,7 +24,6 @@ we are converting trained ReLU networks into Spiking Neural Networks — no retr
 ## Figures
 
 ### Accuracy and Sparsity vs Depth
-<!-- depth_comparison.png goes here — add it to your repo folder and it shows automatically on GitHub -->
 ![Depth Comparison]([depth_comparison.png](https://github.com/kaurarmanjot445-sys/snn-mnist-conversion/blob/main/stability_analysis.png?raw=true))
 
 ### Numerical Stability: Correct vs Wrong t_max
