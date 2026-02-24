@@ -34,10 +34,13 @@ The conversion preserves accuracy, consistent with the exact theoretical mapping
 ## How it works
 The conversion was verified by comparing layer-wise activations and final classification accuracy between the original ReLU network and the converted SNN.
 Each neuron fires one spike at time `t`. Activation is recovered as `x = t_max - t`.
-B1 mapping sets:
+B1 mapping sets(Eq. 9):
 - `W_snn = W_relu` (weights unchanged)
 - `V = (t_max - t_min) - b` (threshold from bias)
 Timing chains across layers: `t_min` of layer n = `t_max` of layer n-1.
+**Why B1 matters:** Avoids vanishing/exploding gradients that plague spike-based training.
+
+**Why t_max matters:** Must fit actual activation range at each layer. Too small → clipping → errors ~1.0. Correct derivation → machine precision ~1e-15 (see stability plot).
 
 ## Files
 
