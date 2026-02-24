@@ -45,9 +45,9 @@ def snn_forward(X, weights, biases):
         t_min = t_prev
         t_max = compute_t_max(relu_acts[n + 1], b, t_min)
 
-        V = (t_max - t_min) - b # threshold (Eq. 9)
+        V = (t_max - t_min) - b # threshold (Eq. 9), tau_c=1 throughout ,so time units and activation units are equal
         delta = t_min - t_in
-        t_out = np.clip(t_min + V - delta @ W, t_min, t_max)
+        t_out = np.clip(t_min + V - delta @ W, t_min, t_max) #neurons cliped to t_max are non-spiking (x_out = 0)
         x_out = np.maximum(t_max - t_out, 0.0) # convert spike time back to activation
 
         sparsity.append(float((t_out < t_max - 1e-9).mean()))
@@ -123,4 +123,5 @@ if __name__ == '__main__':
         print("\nSaved results to conversion_results.pkl")
         print("Run create_plot.py next.")
     else:
+
         print("\nNo results saved. Run train_mnist_pytorch.py first.")
