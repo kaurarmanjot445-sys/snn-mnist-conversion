@@ -37,6 +37,7 @@ B1 mapping sets(Eq. 9):
 - `W_snn = W_relu` (weights unchanged)
 - `threshold = t_max - t_min - b` (since τ_c = 1 throughout)
 Timing chains across layers: `t_min` of layer n = `t_max` of layer n-1.
+
 **Why B1 matters:** Guarantees gradient descent follows identical training trajectories to the ReLU network. Other models (like α1) still diverge during training even with smart initialization — B1 fixes that.
 
 **Why t_max matters:** Must fit actual activation range at each layer.If t_max is chosen too small, activations get clipped and numerical error reaches ~1.0. With the correct t_max derivation, error drops to machine precision (~1e-15), as shown in the stability plot.
