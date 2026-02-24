@@ -67,9 +67,10 @@ matplotlib>=3.5
 ```
 ## Limitations
 - We only implemented post-training conversion, not training from scratch
-- No L1 regularization was applied, so sparsity is higher than the paper's
-  best results (<0.3 spikes/neuron)
-- Results are for MNIST only; the paper extends to CIFAR10, CIFAR100, PLACES365
+- No L1 regularization was applied. Despite this, deeper networks (6, 8 layers)
+  already achieve below 0.3 spikes/neuron naturally — likely because MNIST is 
+  simpler than CIFAR, so neurons activate less frequently.The paper needed L1 
+  regularization to reach this on harder datasets like CIFAR10 and CIFAR100.
   
 ## Acknowledgements
 - Guidance provided by Dr.Guillaume Bellec
