@@ -24,10 +24,10 @@ The conversion preserves accuracy, consistent with the exact theoretical mapping
 ## Figures
 
 ### Accuracy and Sparsity vs Depth
-![this is a image](https://github.com/kaurarmanjot445-sys/snn-mnist-conversion/blob/af78c53f95a53014bd1ec49abe9bac180545c1a3/depth_comparison.png)
+![Accuracy and sparsity vs depth](https://github.com/kaurarmanjot445-sys/snn-mnist-conversion/blob/main/depth_comparison.png?raw=true)
 
 ### Numerical Stability: Correct vs Wrong t_max
-![Stability Analysis](https://github.com/kaurarmanjot445-sys/snn-mnist-conversion/blob/fcaf742c87fa216e0bd425dd7d5064f837f83b31/stability_analysis.png)
+![Numerical error: correct vs wrong t_max](https://github.com/kaurarmanjot445-sys/snn-mnist-conversion/blob/fcaf742c87fa216e0bd425dd7d5064f837f83b31/stability_analysis.png)
 
 ---
 
