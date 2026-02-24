@@ -53,7 +53,8 @@ Timing chains across layers: `t_min` of layer n = `t_max` of layer n-1.
 | `stability_analysis.py` | Show why correct t_max matters |
 
 ## Run
-```python single_layer_demo.py
+```
+python single_layer_demo.py
 python train_mnist_pytorch.py
 python convert_all_models.py
 python create_plot.py
