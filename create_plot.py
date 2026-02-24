@@ -30,16 +30,15 @@ fig.suptitle('MNIST: ReLU MLP to TTFS SNN | B1 Identity Mapping\n',
 # Left: accuracy comparison
 ax1.plot(layers, relu_accs, 'o-', color='royalblue', linewidth=2.5,
          markersize=9, label='ReLU MLP (trained)')
-ax1.plot(layers, snn_accs, 's--', color='tomato', linewidth=2.5,
-         markersize=9, label='TTFS SNN (converted)')
+ax1.plot(layers, snn_accs, 'x', color='tomato', linewidth=2.5,
+         markersize=14, markeredgewidth=3, label='TTFS SNN (converted, x on top of o = exact match)')
 ax1.set_xticks(layers)
 ax1.set_xlabel('Number of Hidden Layers', fontsize=12)
 ax1.set_ylabel('Test Accuracy (%)', fontsize=12)
-ax1.set_title('Accuracy vs Depth\n(lines overlap = exact conversion)', fontsize=11)
+ax1.set_title('Accuracy vs Depth\n(○ = ReLU,  × on top = SNN — exact overlap proves lossless conversion)', fontsize=10)
 ax1.legend(fontsize=10)
 ax1.grid(True, alpha=0.3)
-y_vals = relu_accs + snn_accs
-ax1.set_ylim([min(y_vals) - 0.5, max(y_vals) + 0.5])
+ax1.set_ylim([97.5, 99.0])
 
 # Right: sparsity — deeper networks fire fewer spikes
 ax2.bar(layers, sparsity, color='steelblue',
@@ -58,3 +57,4 @@ plt.tight_layout()
 plt.savefig('depth_comparison.png', dpi=150, bbox_inches='tight')
 
 print("Saved depth_comparison.png")
+
