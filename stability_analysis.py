@@ -18,18 +18,19 @@ def compute_t_max(x_relu, b, t_min):
 
 
 def error_correct(n_layers, n=50, batch=30):
-    # B1 mapping with principled t_max — should give machine precision
     rng = np.random.default_rng(42)
     X = rng.uniform(0, 1, (batch, n))
     Ws = [rng.normal(0, 0.15, (n, n)) for _ in range(n_layers)]
     bs = [np.zeros(n) for _ in range(n_layers)]
-#relu forward to get activations for t_max computation
+
+    # ReLU forward to get activations for t_max computation
     acts = [X]
     h = X
     for W, b in zip(Ws, bs):
         h = relu(h @ W + b)
         acts.append(h)
- #SNN forward
+
+    # SNN forward
     t_in, t_prev, max_err = 1.0 - X, 1.0, 0.0
     for i, (W, b) in enumerate(zip(Ws, bs)):
         t_min = t_prev
@@ -43,11 +44,10 @@ def error_correct(n_layers, n=50, batch=30):
 
 
 def error_wrong(n_layers, n=50, batch=30):
-    # Same thing but t_max is fixed at 0.5 — too small, clips activations
     rng = np.random.default_rng(42)
     X = rng.uniform(0, 1, (batch, n))
     Ws = [rng.normal(0, 0.15, (n, n)) for _ in range(n_layers)]
-   bs = [np.zeros(n) for _ in range(n_layers)]
+    bs = [np.zeros(n) for _ in range(n_layers)]  # fixed indent
 
     acts = [X]
     h = X
@@ -58,14 +58,13 @@ def error_wrong(n_layers, n=50, batch=30):
     t_in, t_prev, max_err = 1.0 - X, 1.0, 0.0
     for i, (W, b) in enumerate(zip(Ws, bs)):
         t_min = t_prev
-        t_max = t_min + 0.5 # wrong: ignores the actual activation range
+        t_max = t_min + 0.5  # wrong: ignores actual activation range
         V = (t_max - t_min) - b
         t_out = np.clip(t_min + V - (t_min - t_in) @ W, t_min, t_max)
         x_snn = np.maximum(t_max - t_out, 0.0)
         max_err = max(max_err, float(np.max(np.abs(acts[i + 1] - x_snn))))
         t_in, t_prev = t_out, t_max
     return max_err
-
 
 layers = list(range(1, 13))
 correct = [error_correct(L) for L in layers]
@@ -100,3 +99,4 @@ plt.tight_layout()
 plt.savefig('stability_analysis.png', dpi=150, bbox_inches='tight')
 
 print("\nSaved stability_analysis.png")
+
