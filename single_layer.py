@@ -1,9 +1,6 @@
 
 import numpy as np
 
-np.random.seed(42)
-
-
 def relu(x):
     return np.maximum(0, x)
 
@@ -74,5 +71,6 @@ if __name__ == '__main__':
           rng.normal(0, 0.05, (6,)),
           rng.normal(0, 0.05, (4,))]
     p2 = verify(Ws, bs, X2, "3-layer network (8 patterns, 10->8->6->4)")
+
 
     print(f"\n{'All checks passed. Safe to proceed.' if p1 and p2 else 'Something is wrong, check the math.'}")
