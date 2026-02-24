@@ -35,11 +35,11 @@ The conversion preserves accuracy, consistent with the exact theoretical mapping
 The conversion was verified by comparing layer-wise activations and final classification accuracy between the original ReLU network and the converted SNN. Each neuron fires one spike at time 't'. Activation is recovered as: 'x = (t_max - t) / τ_c (τ_c = 1 here, so x = t_max - t in code)'
 B1 mapping sets(Eq. 9):
 - `W_snn = W_relu` (weights unchanged)
-- `V = (t_max - t_min)/τ_c - b` (τ_c = 1 throughout, so V = t_max - t_min - b in code`
+- 'threshold = t_max - t_min - b (since τ_c = 1 throughout)'
 Timing chains across layers: `t_min` of layer n = `t_max` of layer n-1.
 **Why B1 matters:** Guarantees gradient descent follows identical training trajectories to the ReLU network. Other models (like α1) still diverge during training even with smart initialization — B1 fixes that.
 
-**Why t_max matters:** Must fit actual activation range at each layer.Too small to clipping to errors 1.0(approx). Correct derivation to machine precision 1e-15(approx) (see stability plot).
+**Why t_max matters:** Must fit actual activation range at each layer.If t_max is chosen too small, activations get clipped and numerical error reaches ~1.0. With the correct t_max derivation, error drops to machine precision (~1e-15), as shown in the stability plot.
 
 ## Files
 
@@ -65,6 +65,12 @@ torchvision>=0.13
 numpy>=1.21
 matplotlib>=3.5
 ```
+## Limitations
+- We only implemented post-training conversion, not training from scratch
+- No L1 regularization was applied, so sparsity is higher than the paper's
+  best results (<0.3 spikes/neuron)
+- Results are for MNIST only; the paper extends to CIFAR10, CIFAR100, PLACES365
+  
 ## Acknowledgements
 - Guidance provided by Dr.Guillaume Bellec
 
