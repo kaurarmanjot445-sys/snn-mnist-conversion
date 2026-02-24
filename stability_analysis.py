@@ -22,14 +22,14 @@ def error_correct(n_layers, n=50, batch=30):
     rng = np.random.default_rng(42)
     X = rng.uniform(0, 1, (batch, n))
     Ws = [rng.normal(0, 0.15, (n, n)) for _ in range(n_layers)]
-    bs = [np.zeros(n)] * n_layers
-
+    bs = [np.zeros(n) for _ in range(n_layers)]
+#relu forward to get activations for t_max computation
     acts = [X]
     h = X
     for W, b in zip(Ws, bs):
         h = relu(h @ W + b)
         acts.append(h)
-
+ #SNN forward
     t_in, t_prev, max_err = 1.0 - X, 1.0, 0.0
     for i, (W, b) in enumerate(zip(Ws, bs)):
         t_min = t_prev
@@ -47,7 +47,7 @@ def error_wrong(n_layers, n=50, batch=30):
     rng = np.random.default_rng(42)
     X = rng.uniform(0, 1, (batch, n))
     Ws = [rng.normal(0, 0.15, (n, n)) for _ in range(n_layers)]
-    bs = [np.zeros(n)] * n_layers
+   bs = [np.zeros(n) for _ in range(n_layers)]
 
     acts = [X]
     h = X
@@ -98,4 +98,5 @@ ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
 plt.savefig('stability_analysis.png', dpi=150, bbox_inches='tight')
+
 print("\nSaved stability_analysis.png")
