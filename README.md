@@ -35,7 +35,7 @@ The conversion preserves accuracy, consistent with the exact theoretical mapping
 The conversion was verified by comparing layer-wise activations and final classification accuracy between the original ReLU network and the converted SNN. Each neuron fires one spike at time 't'. Activation is recovered as: 'x = (t_max - t) / τ_c (τ_c = 1 here, so x = t_max - t in code)'
 B1 mapping sets(Eq. 9):
 - `W_snn = W_relu` (weights unchanged)
-- 'threshold = t_max - t_min - b (since τ_c = 1 throughout)'
+- 'threshold = t_max - t_min - b' (since τ_c = 1 throughout)
 Timing chains across layers: `t_min` of layer n = `t_max` of layer n-1.
 **Why B1 matters:** Guarantees gradient descent follows identical training trajectories to the ReLU network. Other models (like α1) still diverge during training even with smart initialization — B1 fixes that.
 
@@ -73,5 +73,5 @@ matplotlib>=3.5
   regularization to reach this on harder datasets like CIFAR10 and CIFAR100.
   
 ## Acknowledgements
-- Guidance provided by Dr.Guillaume Bellec
+- Guidance provided by Dr. Guillaume Bellec
 
