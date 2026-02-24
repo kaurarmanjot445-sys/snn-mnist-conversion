@@ -13,7 +13,7 @@ torch.manual_seed(42)
 np.random.seed(42)
 
 LAYER_COUNTS = [2, 4, 6, 8]
-HIDDEN_SIZE = 340
+HIDDEN_SIZE = 340  #matches paper Table 1 architecture
 N_EPOCHS = 30
 LR = 1e-3
 BATCH_SIZE = 256
@@ -128,3 +128,4 @@ if __name__ == '__main__':
         print(f" {L} hidden layers: {acc*100:.2f}%")
 
     print("\nDone. Run convert_all_models.py next.")
+
