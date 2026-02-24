@@ -13,7 +13,7 @@ torch.manual_seed(42)
 np.random.seed(42)
 
 LAYER_COUNTS = [2, 4, 6, 8]
-HIDDEN_SIZE = 400
+HIDDEN_SIZE = 340
 N_EPOCHS = 30
 LR = 1e-3
 BATCH_SIZE = 256
@@ -24,7 +24,7 @@ os.makedirs(SAVE_DIR, exist_ok=True)
 
 class MLP(nn.Module):
     # Simple feedforward network with ReLU activations.
-    def __init__(self, n_hidden, hidden_size=400):
+    def __init__(self, n_hidden, hidden_size=340):
         super().__init__()
         layers = []
         in_sz = 784
@@ -126,4 +126,5 @@ if __name__ == '__main__':
     print("\n--- Final Results ---")
     for L, acc in results.items():
         print(f" {L} hidden layers: {acc*100:.2f}%")
+
     print("\nDone. Run convert_all_models.py next.")
