@@ -12,10 +12,10 @@ if os.path.exists('conversion_results.pkl'):
 else:
     print("conversion_results.pkl not found, using my actual experiment numbers.")
     results = {
-        2: {'relu_acc': 0.9826, 'snn_acc': 0.9827, 'sparsity': 0.504},
-        4: {'relu_acc': 0.9830, 'snn_acc': 0.9829, 'sparsity': 0.354},
-        6: {'relu_acc': 0.9826, 'snn_acc': 0.9827, 'sparsity': 0.300},
-        8: {'relu_acc': 0.9826, 'snn_acc': 0.9827, 'sparsity': 0.276},
+        2: {'relu_acc': 0.9826, 'snn_acc': 0.9826, 'sparsity': 0.5449},
+        4: {'relu_acc': 0.9824, 'snn_acc': 0.9824, 'sparsity': 0.2950},
+        6: {'relu_acc': 0.9823, 'snn_acc': 0.9823, 'sparsity': 0.2656},
+        8: {'relu_acc': 0.9825, 'snn_acc': 0.9825, 'sparsity': 0.2117},
     }
 
 layers = sorted(results.keys())
@@ -56,4 +56,5 @@ ax2.grid(True, alpha=0.3, axis='y')
 
 plt.tight_layout()
 plt.savefig('depth_comparison.png', dpi=150, bbox_inches='tight')
+
 print("Saved depth_comparison.png")
