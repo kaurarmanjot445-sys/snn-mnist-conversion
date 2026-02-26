@@ -1,5 +1,7 @@
 # ReLU to SNN Conversion on MNIST
 **PAPER**: https://www.nature.com/articles/s41467-024-51110-5
+
+
 This project converts trained ReLU networks into Time-to-First-Spike (TTFS) Spiking Neural Networks using the B1 identity mapping from Stanojevic et al., Nature Communications 2024.
 
 ---
